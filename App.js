@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
 const regSchema = require('./models/registerSchema')
 mongoose.connect("mongodb+srv://solarisknight:wolf@cluster0.fjloxgx.mongodb.net/Portfolio?retryWrites=true&w=majority")
 .then(()=>{
@@ -11,12 +12,13 @@ mongoose.connect("mongodb+srv://solarisknight:wolf@cluster0.fjloxgx.mongodb.net/
 })
 const App = express()
 App.use(cors())
-App.listen(process.env.PORT,()=>{
+App.listen(3001,()=>{
     console.log("Node App running on port 3001")
 });
 //getting server response
 App.get("/",(req,res)=>{
-    res.send("Welcome to Node.js")
+    // res.send("Welcome to Node.js")
+    res.sendFile(path.join(__dirname,'/views/index.html'));
 });
 App.use(express.json())
 //post method for user details
